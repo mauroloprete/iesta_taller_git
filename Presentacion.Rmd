@@ -31,6 +31,8 @@ pacman::p_load(
 )
 
 
+# Hola Ejemplo.
+
 # Configuración del tema Xaringan:
 
 style_duo_accent(
