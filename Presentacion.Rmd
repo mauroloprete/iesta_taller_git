@@ -111,7 +111,7 @@ class: header_background
 - #### <font color = #000000> Clone: Una copia de un repositorio que vive en tu computadora en vez de la web. <font> 
 - #### <font color = #000000> Pull: Cuando estás actualizando los cambios y combinándolos con los tuyos. <font> 
 - #### <font color = #000000> Commit: Un cambio individual a un archivo (o conjunto de archivos). Cada vez que lo guardo crea una ID única qué permite mantener registro de los cambios, quién los realizó y cuando. <font> 
-- #### <font color = #000000> Push: Enviá tus cambios (Commits) a un repositorio remoto como GitHub.com. <font> 
+- #### <font color = #000000> Push: Envía tus cambios (Commits) a un repositorio remoto como GitHub.com. <font> 
 
 ---
 
