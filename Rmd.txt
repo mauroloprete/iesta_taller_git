@@ -1,0 +1,68 @@
+---
+title: Mtcars  
+date: 28 de February
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1) Agregar descripción de los datos (COMMIT) y los demás pulleamos
+
+# Descripción del conjunto de datos
+
+Los datos se extrajeron de la revista estadounidense Motor Trend de 1974 y comprenden el consumo de combustible y 10 aspectos del diseño y el rendimiento del automóvil para 32 automóviles
+(modelos 1973--74).
+Cuenta con `r nrow(mtcars)` autos y tiene `r ncol(mtcars)` variables, que son las siguientes: 
+
+- mpg : Millas por galón (estadounidense)
+- cyl : Cantidad de cilindros 
+- disp : Información referida a la cilindrada del motor (capacidad mezcla de combustible y aire que hace poner el motor en marcha)
+- hp : Caballos de fuerza del motor
+- drat : Relación entre eje trasero y el eje trasmisión 
+- wt : Peso en mil libras 
+- qsec : Cantidad de segundos en hacer el cuarto de milla 
+- vs : Engine (0 en V , 1 en linea)
+- am : Trasmisión (0 Automatico,1 manual)
+- gear : Número de marchas
+- carb : Número de carburadores 
+
+2) Agregar una gráfica de barras (COMMIT) y los demás pulleamos.
+8) Agregar rama parlela con gráficas de ggplot
+# Conteo de autos en función de la cantidad de cilindros :
+
+```{r}
+barplot(
+    table(mtcars$cyl),
+    main = "Conteo de autos por cilindros",
+    xlab = "Cantidad de cilindros"
+)
+```
+
+3) Agregar una gráfica de barras (COMMIT) y los demás pulleamos.
+
+# Conteo de autos en función de la trasmisión :
+
+```{r}
+barplot(
+    table(mtcars$am),
+    main = "Automatico vs Manual",
+    xlab = "Tipo de trasmisión",
+    names.arg = (c("Automatico","Manual"))
+)
+```
+
+4) Ver comandos de log, diff y status con los últimos 3 commits. 
+
+5) Agregar una gráfica de barras sin titulo, commitear (sin pushear) darse cuenta que nos olvidamos del titutlo y usar git commit --amend
+
+6) Borrar el código de un compañero
+ 
+7) Volver para atras pero manteniendo el código guardado y ver git log
+
+9) Cambiar entre ramas
+
+10) Aceptar las gráficas de ggplot
+  
+

@@ -1,0 +1,707 @@
+---
+title : Taller de Git desde la terminal
+author : Juan Ignacio Baccino, Mauro Loprete
+date : 8 de Marzo de 2021 
+output :
+  xaringan::moon_reader:
+   css : xaringan-themer.css
+   lib_dir : libs
+   includes:
+    after_body: insert-logo.html
+   nature :
+     ratio : "16:9"
+     highlightStyle: github
+     slideNumberFormat: '%current%'
+     highlightLines: true
+     countIncrementalSlides: false
+
+---
+
+```{r setup, include = F , warning = F }
+
+options(htmltools.dir.version = FALSE)
+if(!require(pacman)) {install.packages("pacman")}
+pacman::p_load(
+  xaringanthemer,
+  here,
+  RefManageR,
+  bibtex,
+  htmltools,
+  showtext
+)
+
+
+# Configuración del tema Xaringan:
+
+style_duo_accent(
+  primary_color = "#035AA6",
+  secondary_color = "#03A696",
+  header_font_google = google_font("Titillium Web", "600"),
+   text_font_google   = google_font("Crimson Pro", "300", "300i"),
+   code_font_google   = google_font("IBM Plex Mono"),
+   base_font_size = "22px",
+   text_font_size = "1rem",
+   code_font_size = "0.7rem",
+   code_inline_font_size = "0.7em",
+   footnote_font_size = "0.6em",
+   header_h1_font_size = "2.2rem",
+   header_h2_font_size = "1.90rem",
+   header_h3_font_size = "1.7rem"
+)
+
+
+# Configuración de la bibliografía 
+
+BibOptions(
+  check.entries = FALSE,
+  bib.style = "authoryear",
+  cite.style = "alphabetic",
+  style = "markdown",
+  hyperlink = FALSE,
+  dashed = FALSE
+)
+bib <- ReadBib(
+  here("Presentacion_git","bibliografia.bib"),
+  check = FALSE,
+  .Encoding = "UTF-8"
+)
+
+```
+class: header_background
+
+# Que es y para que sirve GIT ? 
+
+- #### <font color = #000000> Sistema de control de versionado diseñado (originalmente) para desarrollo de software de manera colaborativa. <font> 
+- #### <font color = #000000> Lo usamos para manejar la colección de archivos que hacen a un proyecto (datos, figuras, reportes, código fuente). <font>
+- #### <font color = #000000> Git permite el seguimiento de la evolución de un conjunto de archivos que se llama repositorio. <font>
+- #### <font color = #000000> Un sistema de control de versiones nos va a servir para trabajar en equipo de una manera mucho más simple y optima cuando estamos desarrollando software. <font> 
+- #### <font color = #000000> Vamos a poder trabajar en equipo de una manera muy sencilla y optimizada (** división de tareas **) <font>
+- #### <font color = #000000> Trackear y obtener versiones anteriores de nuestro proyecto de manera sencilla <font> 
+---
+
+class: header_background
+
+# Instalación : 
+
+## <font color = #03A696> En windows : <font>  
+
+<https://git-scm.com/download/win> 
+
+## <font color = #03A696> En Ubuntu : <font>  
+
+```{bash, eval = F}
+sudo apt-get install git-all
+```
+
+## <font color = #03A696> En Mac (con el uso de Homebrew) : <font>
+
+```{bash, eval = F}
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install git
+```
+---
+
+class: header_background
+
+# Terminología
+
+- #### <font color = #000000> Repository : Elemanto más básico de git. Contiene todos los archivos del proyecto y guarda un historial de cada archivo.<font> 
+- #### <font color = #000000> Clone: Una copia de un repositorio que vive en tu computadora en vez de la web. <font> 
+- #### <font color = #000000> Pull: Cuando estás actualizando los cambios y combinándolos con los tuyos. <font> 
+- #### <font color = #000000> Commit: Un cambio individual a un archivo (o conjunto de archivos). Cada vez que lo guardo crea una ID única qué permite mantener registro de los cambios, quién los realizó y cuando. <font> 
+- #### <font color = #000000> Push: Enviá tus cambios (Commits) a un repositorio remoto como GitHub.com. <font> 
+
+---
+
+class: header_background
+
+# Terminología
+
+- #### <font color = #000000> Fork: Es una copia personal del repositorio de otro usuario que está en tu cuenta. Permite hacer cambios libremente a un proyecto sin afectar el original. <font> 
+- #### <font color = #000000> Pull Request: Permite que un proyecto tenga múltiples ramas de desarrollo independiente.Algunas ramas pueden pegarse a la versión de desarrollo original. <font> 
+- #### <font color = #000000> Issue: Son mejoras sugeridas, avisos de un problema o preguntas relacionadas a un repositorio. <font> 
+- #### <font color = #000000> Remote: Es la versión de algo que está en un servidor, probablemente GitHub.com. Puede estar conectado a clones locales tal que los cambios se sincronicen <font> 
+.footnote[
+*.`r Citet(bib, key = "NuevasTecno")` 
+]
+
+---
+
+class: header_background
+
+# Repositorio locales y remotos 
+.center[
+```{r,out.width = 900, fig.retina =2,echo = F}
+ knitr::include_graphics("Flujo.png")
+```
+]
+
+---
+
+class: header_background
+
+# Ejemplo de laboratorio 
+
+A lo largo de todo el taller vamos a tratar de reproducir el trabajo colaborativo con git y para esto vamos a suponer que estamos realizando un 
+primer acercamiento con conjunto de datos que refieren a datos referidos al consumo de combustible, diseño y rendimiento de 32 modelos de automoviles 
+en el 1974, extraidos de la revista *motor trend*.
+
+Los siguientes puntos a tratar se encuentran en 5 Módulos:
+
+- Módulo 1: Introducción a GIT
+- Módulo 2: Comandos útiles para ver el estado del repositorio
+- Módulo 3: Correción de errores (o arrepentimientos)
+- Módulo 4: Trabajando con ramas
+- Módulo 5: Git Stash (El portapapeles de git) 
+
+.footnote[
+*.`r Citet(bib, key = "ProGit")` 
+]
+---
+class: title-slide,middle
+
+# Módulo 1 : Introducción a GIT
+
+## 1. Configuración de nuestra información <font> 
+## 2. Creación de repositorios locales <font>
+## 3. Asociar repositorio local con repositorio remoto <font>
+## 4. Workflow of GIT repository´s  (add, commit, push) <font> 
+## 5. Clonar repositorios (Trabajo colaborativo) <font> 
+
+---
+### Configuración de nuestra información 
+
+```{bash, eval = F}
+git config --global user.email "Nuestro correo"
+git config --global user.name "Nuestro apodo"
+```
+
+A cada commit se le asocia está información para identificar los cambios realizados por cada integrante del equipo. 
+
+
+### Creación de repositorios locales 
+Primero tenemos que situarnos en nuestro directorio, movernos con el comando de la terminal `cd` y la ruta de nuestro directorio entre comillas. 
+
+Una vez hecho esto, vamos a pedirle a git que haga el seguimiento de este directorio, lo haremos de la siguiente forma : 
+
+```{bash, eval = F }
+git init 
+```
+
+Luego nos saldra un mensaje haciendo referencia a que ya estamos haciendo el seguimiento de nuestro directorio con **git**.
+---
+
+### Asociar repositorio local con repositorio remoto
+
+En el caso de querer trabajar con ramas remotas (Github, Gitlab, entre otros) debemos de crear la conexión con la nube. Para esto debemos de contar con una cuenta 
+y crear un repositorio desde su página web, para asociar la dirección a nuestro repositorio local. 
+
+```{bash, eval = F}
+git remote add origin https://github.com/Usuario/NombreRepositorio.git
+```
+
+Una vez realizado esto, podemos comenzar a trabajar con git y los repositorios remotos. 
+
+#### Tipos de repositorios : 
+
+- <font color = #000000> Públicos <font> 
+
+En los repositorios públicos el código es abierto para la comunidad, es utilizado para el desarrollo de software *open source*. Para relizar aportes se debe de crear una copia 
+*propia* del repositorio haciendo un **fork**, una vez realizados los cambios se debe de pedir un *pull request*. 
+- <font color = #000000> Privados <font>
+
+También podemos utilizar la nube para compartir el código con nuestro equipo, para esto debemos de agregarlos como colaboradores desde la página web. 
+
+---
+
+### Workflow of GIT repository´s  (add, commit, push)
+
+Para pedirle a git que capture los cambios realizados en un archivo debemos de indicarselo. Como habíamos mencionado anteriormente realizamos cambios en el Working Directory
+una vez conformes con ellos debemos de pasarlo al staging area para luego realizar un commit.
+Los pasos son los siguientes : 
+
+```{bash, eval = F}
+git add Mtcars.Rmd
+```
+
+Podemos consultar el comando `git status` para ver brevemente el estado de nuestro repositorio.
+
+```{bash, eval = F}
+git status
+```
+
+Como se puede ver, Git reconoce que tiene que hacer seguimiento a nuestro nuevo archivo. 
+
+---
+
+## Nuestro primer commit
+
+```{bash, eval = F}
+git commit -m "Nuestro primer commit"
+```
+
+Ahora solo falta subirlo a la nube : 
+
+```{bash, eval = F}
+git push origin master
+```
+
+Nuestro compañero con su terminal tendrá que navegar hasta el directorio donde desea copiar el repositorio (en el se incluirá una capreta con el nombre del repositorio) y 
+ejectuar el siguiente comando : 
+
+```{bash, eval = F}
+git clone https://github.com/Usuario/NombreRepositorio.git
+```
+
+---
+class: inverse,middle
+
+
+# Parte práctica 1 
+
+### 1. Agregar descripción de los datos hacer un commit y los demás pulleamos <font>
+### 2. Agregar una gráfica de barras hacer un commit y los demás pulleamos. <font>
+### 3. Agregar otra gráfica de barras hacer un commit y los demás pulleamos. <font>
+---
+
+class: title-slide,middle
+
+
+# Módulo 2: Comandos útiles para ver el estado del repositorio
+
+
+## 1. git log <font>
+## 2. git diff <font> 
+## 3. git status <font> 
+
+---
+
+### Interpreación del git log 
+
+El git log nos permite ver el historial de todo nuestro proyecto, el comando general es `git log`, aunque en la práctica se usan varias opciones (flag) para tener una mejor visualización: 
+
+```{bash, eval = F}
+git log --all --decorate --oneline --graph
+```
+El comando *all* nos permite ver información sobre todas las ramas, incluso las ocultas que refieren a las remotas, *decorate* nos brinda colores en la terminal, *oneline* hace que tengamos una presentación en la terminal agradabale y *graph* nos da una visualización de la ramificación de nuestro proyecto.  
+
+Cada commit tiene un código único llamado *hash*, el cual nos permite referenciar dicho commit. 
+
+Situaciones : 
+
+- Comparación de commits 
+- Tagear versiones y referencialos a un commit en concreto 
+- Volver-Navegar al repositorio en ese momento 
+
+#### Navegar en nuestro historial 
+
+```{bash, eval = F}
+git checkout <Hash commit> # Vamos hasta el commit seleccionado
+
+```
+
+---
+
+### Interpretación del git diff 
+
+Con git diff podemos ver las diferencias entre dos commits, generalmente uno esta interesado entre el último commit y los cambios realizados en el *WorkDirectory* (WD).  
+
+```{bash, eval = F}
+git diff 
+```
+
+Con un simbolo de + nos muestra las lineas que agregamos y con - las que borramos, en algunas terminales se presentan de color verde y rojo respectivamente. 
+
+También podemos ver cambios relativos entre diferentes commits para esto únicamente debemos de indicar los hash de los dos commit: 
+
+```{bash,eval = F}
+git diff <hash commit más viejo> <hash commit mas nuevo> --flag's <Archivo>
+```
+
+Un flag muy utilizado es `--color-words` que muestra en verde las adicciones y en rojo el texto de la versión anterior. También es útil ver las diferencias de un único archivo, para esto únicamente 
+hay que hacer referencia a el. 
+---
+
+### Interpretación del git status 
+
+Este comando nos indica:  
+
+1) información relativa a la rama en la que estamos apuntando (HEAD), 
+
+2) los cambios prontos para commitear, es decir aquellos incluidos en el staging área y 
+
+3) los cambios en el directorio de trabajo, es decir aquellos "a los que no hemos puesto en la caja". 
+
+```{bash, eval = F}
+git status 
+```
+---
+
+class: inverse,middle
+
+
+# Parte práctica 2 
+
+### 1. Ver todo el historial de nuestro reposiotorio <font>
+### 2. Con git diff ver que efectivamente el tercer commit solo se agrega la gráfica a nuestro archivo Rmd. <font>
+### 3. Salida del git status <font>
+
+
+---
+
+class: title-slide,middle
+
+
+# Módulo 3: Correción de errores (o arrepentimientos)
+
+
+## 1. Uso del flag *ammend* de git commit  <font> 
+## 2. Uso de git reset y consecuencias <font> 
+## 3. Uso de git revert <font> 
+
+
+---
+
+### Uso de git commit --amend 
+
+Este comando puede ser utilizado para cambiar el mensaje del último commit (si no hicimos) o agregar nuevos cambios al mismo y no tener que hacer un nuevo commit.
+Supongamos que se realizó un gráfico de barras, hicimos add y commit pero nos olvidamos que nos faltaba el título... modificamos nuestro código y realizamos lo siguiente :
+
+```{bash, eval = F}
+git add # Para volver a agarear los cambios realizados a SA
+git commit --amend 
+```
+#### Ya esta pronto nuestro único commit, podremos publicarlo o seguir trabajando sin problemas. 
+
+---
+
+### Uso de git reset 
+
+Git reset es un comando "peligroso" ya que este **puede alterar nuestro historial de trabajo**. En el pueden existir diferentes configuraciones para que los cambios revertidos queden en nuestro directorio de trabajo (y no el repositorio de git y SA) o para borrarlos definitivamente. 
+
+Se recomienda utilizar este comando inteligentemente y siempre en trabajos locales salvo que en los remotos sea de necesaria importacia.
+
+Supongamos que se quiere borrar el cambio realizado por nuestro compañero (el ha subido sus cambios al repositorio en la nube) para esto haremos lo siguiente : 
+
+```{bash, eval = F}
+git reset HEAD~1
+```
+
+La utilización de **HEAD** es muy práctica, en este caso se hace referencia a que a donde este apuntando el HEAD en este caso (el commit que queremos borrar) que "regrese" uno hacía atras. 
+
+De esta manera, no tenemos que hacer uso del HASH de dicho commit, por su contra parte, en el caso de volver a un commit en concreto es necesario utilizarlo. 
+---
+
+### Uso de git reset (cont.)
+
+Por defecto, `git reset` pasa todos los cambios a nuestro directorio de trabajo, es decir únicamente toca el repositorio de git y el SA, a este parámetro se le llama **mixed**. 
+En el caso que querramos ademas de volver a un determinado momento de nuestro proyecto y borrar cualquier rastro : 
+
+```{bash,eval = F}
+git reset --hard <hash commit>
+```
+
+De forma análoga y/o borrando archivos especificos: 
+
+```{bash,eval = F}
+git reset --mixed <hash commit>
+git checkout -- <Archivo 1 a descartar todos los cambios> 
+git checkout -- <Archivo 2 a descartar todos los cambios>
+...
+git checkout -- <Archivo n a descartar todos los cambios>
+```
+
+Si bien los resultados son los mismos, en situaciones concretas se buscar hacer un reset, manteniendo los cambios de determinados archivos, mientras que de otros descartarlos definitivamente. En este contexto, el método a utilizar sería el mostrado anteriormente. 
+---
+
+### Uso de git reset (cont.)
+
+Como se mencionó anteriormente el uso del `git reset` modifica el historial de nuestro trabajo de manera local. Al momento de publicar nuestros cambios en el reposiotrio remoto nos va a 
+advertir que el repositorio esta tantas confirmaciones adelante como las que nosotros retrocedimos.
+
+Para solucionar esto y modificar también el historial en la rama remota debemos pushear de la siguiente manera :
+
+```{bash,eval = F}
+git push --force origin <rama> 
+```
+
+Esto hace que el historial "válido" sea el de nuestro repositorio local y actualice el remoto.
+
+Para no tener conflicos luego, advertir a nuestros colaboradores que cambiamos el historial. Esto se debe a que
+ellos aún tienen el historial viejo y al fusionar los cambios remotos con los locales habrán conflictos y pueden llegar a deshacer nuestro reset. 
+
+Para traer los cambios del repositorio remoto y actualizar el historial local deben de ejectuar el siguiente comando : 
+
+```{bash,eval = F}
+git pull --rebase origin <rama>
+```
+
+El comando rebase también sirve para actualizar confirmaciones de diferentes ramas, fusionar commits en el tiempo, cambiarles el mensaje, **siempre cambiando el historial**. 
+
+---
+
+
+### Uso de git revert 
+
+Git reset deja *huerfanas* las confirmaciones que dejemos a su derecha y luego de 30 días sera imposible recuperarlas. En el caso que querramos recupearlas y nos encontremos en un lapso de tiempo adecuado, podemos usar
+`git reflog`. 
+
+Sin embargo, para evitar inconvenientes y ser consistentes con el historial de trabajo, se recomienda utilizar `git revert` que también nos devuelve a versiones anteriores,
+pero haciendo un nuevo cambio advirtiendo que lo hizo, es decir, un commit. 
+
+```{bash,eval = F}
+git revert <id commit> 
+```
+
+También pueden existir situaciones en las que necesitemos "volver para "atras" y no hacer un commit inmediatamente 
+
+```{bash,eval = F}
+git revert --no-commit <Hash commit>
+```
+
+Seguimos haciendo nuestras modificaciones, una vez conformes los pasos de siempre, add y commit.
+
+---
+
+class: inverse,middle
+
+
+# Parte práctica 3
+
+#### Vamos a agregar una nueva visualización y enferntarnos a diferentes situaciones : 
+
+## 1. Pensar que hemos terminado (commitiamos y nos faltaba el título de la gráfica) <font>
+
+## 2. Deshacer el commit anterior (sin tocar el historial) creando un nuevo cambio que avise que hemos realizado este cambio. <font>
+
+## 3. Borrar los cambios de un compañero<font>
+
+
+---
+
+class: title-slide,middle
+
+
+# Módulo 4: Trabajando con ramas
+
+
+## 1. git branch  <font> 
+## 2. git checkout nombre_rama <font> 
+## 3. git merge source destination<font> 
+## 4. merge conflicts<font>
+## 5. Pull Request's <font>
+
+---
+
+
+### Git branch 
+
+La razón principal de utilizar ramas es que nos permite obtener diferentes versiones de nuestro trabajo y a su vez tener un seguimiento de estas. 
+
+<blockquote>
+Each branch is like a parallel universe: changes you make in one branch do not affect other branches (until you merge them back together).
+</blockquote>
+
+
+```{bash, eval = F}
+git branch # Ver listado de ramas disponible local
+```
+*Obs:* --all para ver todas las ramas, locales y remotas.
+
+```{bash,eval = F}
+git branch <NuevaRama> # Crear una nueva rama
+git branch -d <NuevaRama> # Borrar nueva rama 
+```
+
+---
+
+### Git checkout 
+
+Se utiliza generalmente para cambiar entre ramas al igual que para navegar en nuestro historial. 
+
+```{bash, eval = F}
+git checkout <Rama>
+git checkout -b <NuevaRama> # Creamos la rama y a su vez nos cambiamos a ella
+```
+
+#### Navegar en nuestro historial 
+
+```{bash, eval = F}
+git checkout <Hash commit> # Vamos hasta el commit seleccionado
+
+```
+
+---
+
+### Git merge 
+
+A pesar de las diferentes ramas pueden convivir de forma independiente, generalmente con el fin de obtener un producto final se fusionan las diferentes ramas.
+
+```{bash,eval = F}
+git merge <source> <destination> 
+```
+
+Existen situaciones en las que estamos interesados en fusionar dos ramas pero solo su "versión final" es decir, no incluir el historial de la rama.
+
+```{bash,eval = F}
+git merge --squash 
+git commit -m "Breve comentario sobre la fusión"
+```
+
+### Merge conflicts 
+
+En las fusiones pueden ocurrir conflictos, sin embargo estos se pueden reconocer. 
+En la práctica se tienen dos principales tipos:
+
+1. Modificar la misma línea de código en las dos ramas
+2. Cambios diferentes en ambas ramas pero que no se superponen 
+
+---
+
+### Pull Request's 
+
+Los pull request son utilizados en repositorios para establecer cierta formalidad en la implementación e incorporación de la información de la rama de 
+desarollo. 
+
+GitHub y Gitlab al publicar ramas (diferentes a las principales) la terminal nos brinda un link para hacer efectivo este pull request o desde la 
+interfaz web del servicio que estemos utilizando. 
+
+Vamos a suponer que la **rama1** ya se encuentra en su versión final y esta lista para incoporarse a la rama principal. Además, supongamos que ya se encuentra abierto un pull request.
+
+Para aceptarlo: 
+
+1) tenemos que actualizar los cambios, 
+
+2) crear una rama local asociada a la rama remota de desarrollo, 
+
+3) incorporar los cambios incluidos de master, 
+
+4) solucionar problemas de fusión (en el caso que existieran). 
+
+5) Traer a master los cambios realizados en la nueva rama 
+
+---
+
+### Pull Request's (cont)
+
+
+Esto con el fin de fusionar la rama principal con la rama de desarollo. Una vez hecho esto, la nueva funcionalidad se encuentra en la rama principal. 
+
+```{bash, eval = F}
+git fetch origin
+git checkout -b Rama1 origin/Rama1 # Copia local de la rama remota
+git merge master # Traemos los cambios de master a Rama1
+...Solucionamos problemas de fusión...
+git merge Ejemplos master # Traemos la información de Ejemplos (previamente fusionada con master) a master
+```
+
+Lo que hicimos en la segunda línea de código fue crear una copia local editable de la rama remota, algo similar se puede hacer con 
+`git checkout --track origin/Rama1`
+---
+
+### Eliminar ramas 
+
+#### Ramas locales : 
+```{bash, eval = F}
+git branch -d <Rama>
+```
+
+#### Ramas remotas : 
+
+```{bash, eval = F}
+git push origin --delete <Rama>
+```
+---
+
+class: inverse,middle
+
+
+# Parte práctica 4
+
+### 1. Mostrar como se hace un pull request <font>
+### 2. Hacer una copia local de la rama de desarollo <font>
+### 3. Ver el código dentro de ella y compilar el Rmd <font>
+### 4. Fusionar la principal <font>
+
+---
+class: title-slide,middle
+
+# Módulo 5 : Git stash
+
+## 1. git stash push  <font> 
+## 2. git stash list <font>
+## 3. git stash apply <font> 
+## 4. git stash drop <font> 
+## 5. git stash pop <font>
+
+
+---
+
+### Git stash push 
+
+Supongamos que estamos haciendo avances en nuestro proyecto, nuestros cambios aún estan en nuestro directorio de trabajo, además de considerar que 
+todavía no estan listos para añadir al SA y tenemos que avanzar en otra parte de nuestro proyecto... ¿Que hacemos?
+
+Para añadir nuestros cambios a un espacio temporal se utiliza `git stash` 
+
+```{bash,eval = F}
+git stash push -m "Breve comentario para recordarlo luego"
+```
+
+Algunos cambios guardados en el stash pueden convertirse en ramas luego y la manera de hacerlo es muy sencillo. 
+
+---
+
+### Git stash list 
+
+No tenemos un límite para añadir información en esta "memoria" por lo que una buena idea es añadirle una buena descripción. También existe una manera de ver el listado de todos
+nuestros cambios temporales
+
+```{bash, eval = F}
+git stash list
+```
+
+Con este comando podemos ver que cada uno tiene una referencia del estilo, `stash@{n}`, siendo este el identificador. En el caso de no indicarlo los cambios serán explusados
+desde el más nuevo hasta el mas viejo. 
+
+---
+
+### Git stash apply
+
+Ahora vamos a traer la información guardada en el stash al WD para poder seguir mejorandolo. 
+
+```{bash,eval = F}
+git stash apply stash@{Número del stash}
+```
+
+En el caso de no agregarle el número de stash se agregara por defecto el `stash@{0}`.
+
+En el caso de usar PowerShell utilizar comillas para referenciar el stashs, es decir `"stash@{n}"` también se puede utilizar: 
+
+```{bash,eval = F}
+git stash apply n
+``` 
+### Git stash drop 
+
+Al usar el flag `apply` podemos llevar los cambios temporales del stash al WD pero este permanecerá aún en el stash. Para eliminarlo utilizaremos `drop` 
+
+```{bash,eval = F}
+git stash drop stash@{n} 
+```
+---
+
+### Git stash pop 
+
+En algunos casos solamente estamos interesados en usar el stash como una memoria temporal, al usar `pop` se aplica a nuestro WD y se elimina del stash. 
+
+```{bash,eval = F}
+git stash pop
+```
+---
+class: header_background
+# Referencias 
+
+```{r refs, echo=FALSE, results="asis"}
+PrintBibliography(bib, .opts = list(bib.style = "alphabetic"))
+```
+
