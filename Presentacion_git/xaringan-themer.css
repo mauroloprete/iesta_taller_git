@@ -18,29 +18,29 @@
  *  Version: 0.4.1
  *
  * ------------------------------------------------------- */
-@import url(https://fonts.googleapis.com/css?family=Crimson+Pro:300,300i&display=swap);
-@import url(https://fonts.googleapis.com/css?family=Titillium+Web:600&display=swap);
-@import url(https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Maven+Pro:300,300i&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Maven+Pro:600&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap);
 
 
 :root {
   /* Fonts */
-  --text-font-family: 'Crimson Pro';
+  --text-font-family: 'Maven Pro';
   --text-font-is-google: 1;
   --text-font-family-fallback: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial;
   --text-font-base: sans-serif;
-  --header-font-family: 'Titillium Web';
+  --header-font-family: 'Maven Pro';
   --header-font-is-google: 1;
   --header-font-family-fallback: Georgia, serif;
-  --code-font-family: 'IBM Plex Mono';
+  --code-font-family: 'Source Code Pro';
   --code-font-is-google: 1;
-  --base-font-size: 22px;
+  --base-font-size: 18px;
   --text-font-size: 1rem;
   --code-font-size: 0.7rem;
   --code-inline-font-size: 0.7em;
-  --header-h1-font-size: 2.2rem;
-  --header-h2-font-size: 1.90rem;
-  --header-h3-font-size: 1.7rem;
+  --header-h1-font-size: 1.9rem;
+  --header-h2-font-size: 1.70rem;
+  --header-h3-font-size: 1.5rem;
 
   /* Colors */
   --text-color: #000000;
