@@ -1,8 +1,8 @@
 ---
-title : Taller de Git
-subtitle : Capacitaciones internas del IESTA
-author : Juan Ignacio Baccino, Mauro Loprete
-date : 21 de Febrero de 2021 
+title : Capacitaciones IESTA - Taller 2
+subtitle : Taller de Git
+author : Juan Ignacio Baccino y Mauro Loprete
+date : 21 de Febrero de 2022
 output :
   xaringan::moon_reader:
    css : xaringan-themer.css
@@ -48,32 +48,6 @@ style_duo_accent(
    header_h1_font_size = "1.9rem",
    header_h2_font_size = "1.70rem",
    header_h3_font_size = "1.5rem"
-)
-
-
-
-# Hola sigo hacienco cambios
-
-
-# Hola sigo haciendo cambios
-
-# Configuración de la bibliografía 
-
-BibOptions(
-  check.entries = FALSE,
-  bib.style = "authoryear",
-  cite.style = "alphabetic",
-  style = "markdown",
-  hyperlink = FALSE,
-  dashed = FALSE
-)
-bib <- ReadBib(
-  here(
-    "Presentacion_git",
-    "bibliografia.bib"
-  ),
-  check = FALSE,
-  .Encoding = "UTF-8"
 )
 
 ```
@@ -1033,12 +1007,12 @@ class: inverse,middle
 ### 1. Mostrar como se hace un pull request <font>
 ### 2. Hacer una copia local de la rama de desarollo <font>
 ### 3. Ver el código dentro de ella
-### 4. Fusionar la principal <font>
+### 4. Fusionar la rama principal <font>
 
 ---
 class: title-slide,middle
 
-# Módulo 5 : Git stash
+# Módulo 5: Git stash
 
 ## 1. Guardar cambios temporalmente <font> 
 ## 2. Listar cambios guardados temporalmente <font>
@@ -1051,7 +1025,7 @@ class: title-slide,middle
 
 class: header_background
 
-# Módulo 5 : Git stash
+# Módulo 5: Git stash
 
 ## Guardar cambios temporalmente
 
@@ -1072,7 +1046,7 @@ y no nos encontramos en la rama correspondiente.
 
 class: header_background
 
-# Módulo 5 : Git stash
+# Módulo 5: Git stash
 
 ## Listar cambios temporales.
 
@@ -1094,7 +1068,7 @@ desde el más nuevo hasta el mas viejo.
 
 class: header_background
 
-# Módulo 5 : Git stash
+# Módulo 5: Git stash
 
 ## Aplicar  el último cambio temporal.
 
@@ -1122,7 +1096,7 @@ git stash apply n
 
 class: header_background
 
-# Módulo 5 : Git stash
+# Módulo 5: Git stash
 
 ## Borrar el último cambio temporal.
 
@@ -1144,6 +1118,77 @@ git stash pop
 ```
 
 ---
+
+class: title-slide,middle
+
+# Módulo 6: Ignorando archivos
+
+## 1. Crear nuestro gitignore 
+## 2. Ver diferentes gitignore
+---
+
+class: header_background
+
+# Módulo 6: Ignorando archivos
+
+## Crear nuestro git ignore
+
+Para ignorar un archivo simplemente debemos de crear un archivo en nuestro directorio de
+git con el nombre `.gitignore` y dentro de él escribir los archivos que deseamos ignorar.
+
+Se pueden escribir los archivos por su nombre o utilizar expresiones regulares o ingorar carpetas
+enteras.
+
+### <font color = #035AA6> Ignorar archivos por extensión </font>
+
+```{bash, eval = F}
+\*.csv # Si se encuentran en la raíz. 
+/*.csv # Si se encuentran en cualquier subdirectorio.
+```
+
+## Ver ejemplos de gitignore
+
+[Uno de R](https://github.com/github/gitignore/blob/main/R.gitignore)
+
+
+[Uno de Python](https://github.com/github/gitignore/blob/main/Python.gitignore)
+
+
+---
+
+class: header_background
+
+# Para seguir aprendiendo ...
+
+### <font color = #035AA6 >  git rebase </font>
+
+Nos perimte modificar el historial de nuestros commit's ya sea fusionandolos, cambiarles el órden o eliminarlos.
+
+--
+
+### <font color = #035AA6 > git cherry-pick </font>
+
+Nos permite mover commits a diferentes ramas y cambiarles el órden.
+
+--
+
+### <font color = #035AA6 > git tag </font>
+
+Podemos poner etiquetas a nuestro código para poder identificarlo, ej : `v1.0.0`.
+
+--
+
+#### <font color = #00000> Tip: Etiquetas </font>
+
+Usando el flag -a, podemos crear una etiqueta para cada commit y usando -m podemos indicarle un mensaje : 
+
+```{bash, eval = F}
+git tag -a v1.0.0 -m "Etiqueta para la versión 1.0.0"
+```
+
+---
+
+
 class: header_background
 # Referencias 
 
@@ -1161,3 +1206,12 @@ class: header_background
 ]
 
 
+---
+
+class: title-slide,middle,center
+
+# ¿Preguntas?
+
+--
+
+# ¡Gracias!

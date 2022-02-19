@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Taller de Git</title>
+    <title>Capacitaciones IESTA - Taller 2</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Juan Ignacio Baccino, Mauro Loprete" />
+    <meta name="author" content="Juan Ignacio Baccino y Mauro Loprete" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
@@ -11,10 +11,10 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Taller de Git
-## Capacitaciones internas del IESTA
-### Juan Ignacio Baccino, Mauro Loprete
-### 21 de Febrero de 2021
+# Capacitaciones IESTA - Taller 2
+## Taller de Git
+### Juan Ignacio Baccino y Mauro Loprete
+### 21 de Febrero de 2022
 
 ---
 
@@ -1019,12 +1019,12 @@ class: inverse,middle
 ### 1. Mostrar como se hace un pull request &lt;font&gt;
 ### 2. Hacer una copia local de la rama de desarollo &lt;font&gt;
 ### 3. Ver el código dentro de ella
-### 4. Fusionar la principal &lt;font&gt;
+### 4. Fusionar la rama principal &lt;font&gt;
 
 ---
 class: title-slide,middle
 
-# Módulo 5 : Git stash
+# Módulo 5: Git stash
 
 ## 1. Guardar cambios temporalmente &lt;font&gt; 
 ## 2. Listar cambios guardados temporalmente &lt;font&gt;
@@ -1037,7 +1037,7 @@ class: title-slide,middle
 
 class: header_background
 
-# Módulo 5 : Git stash
+# Módulo 5: Git stash
 
 ## Guardar cambios temporalmente
 
@@ -1059,7 +1059,7 @@ y no nos encontramos en la rama correspondiente.
 
 class: header_background
 
-# Módulo 5 : Git stash
+# Módulo 5: Git stash
 
 ## Listar cambios temporales.
 
@@ -1082,7 +1082,7 @@ desde el más nuevo hasta el mas viejo.
 
 class: header_background
 
-# Módulo 5 : Git stash
+# Módulo 5: Git stash
 
 ## Aplicar  el último cambio temporal.
 
@@ -1112,7 +1112,7 @@ git stash apply n
 
 class: header_background
 
-# Módulo 5 : Git stash
+# Módulo 5: Git stash
 
 ## Borrar el último cambio temporal.
 
@@ -1136,6 +1136,79 @@ git stash pop
 ```
 
 ---
+
+class: title-slide,middle
+
+# Módulo 6: Ignorando archivos
+
+## 1. Crear nuestro gitignore 
+## 2. Ver diferentes gitignore
+---
+
+class: header_background
+
+# Módulo 6: Ignorando archivos
+
+## Crear nuestro git ignore
+
+Para ignorar un archivo simplemente debemos de crear un archivo en nuestro directorio de
+git con el nombre `.gitignore` y dentro de él escribir los archivos que deseamos ignorar.
+
+Se pueden escribir los archivos por su nombre o utilizar expresiones regulares o ingorar carpetas
+enteras.
+
+### &lt;font color = #035AA6&gt; Ignorar archivos por extensión &lt;/font&gt;
+
+
+```bash
+\*.csv # Si se encuentran en la raíz. 
+/*.csv # Si se encuentran en cualquier subdirectorio.
+```
+
+## Ver ejemplos de gitignore
+
+[Uno de R](https://github.com/github/gitignore/blob/main/R.gitignore)
+
+
+[Uno de Python](https://github.com/github/gitignore/blob/main/Python.gitignore)
+
+
+---
+
+class: header_background
+
+# Para seguir aprendiendo ...
+
+### &lt;font color = #035AA6 &gt;  git rebase &lt;/font&gt;
+
+Nos perimte modificar el historial de nuestros commit's ya sea fusionandolos, cambiarles el órden o eliminarlos.
+
+--
+
+### &lt;font color = #035AA6 &gt; git cherry-pick &lt;/font&gt;
+
+Nos permite mover commits a diferentes ramas y cambiarles el órden.
+
+--
+
+### &lt;font color = #035AA6 &gt; git tag &lt;/font&gt;
+
+Podemos poner etiquetas a nuestro código para poder identificarlo, ej : `v1.0.0`.
+
+--
+
+#### &lt;font color = #00000&gt; Tip: Etiquetas &lt;/font&gt;
+
+Usando el flag -a, podemos crear una etiqueta para cada commit y usando -m podemos indicarle un mensaje : 
+
+
+```bash
+git tag -a v1.0.0 -m "Etiqueta para la versión 1.0.0"
+```
+
+---
+
+
 class: header_background
 # Referencias 
 
@@ -1151,6 +1224,15 @@ class: header_background
 ]
 
 
+---
+
+class: title-slide,middle,center
+
+# ¿Preguntas?
+
+--
+
+# ¡Gracias!
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
