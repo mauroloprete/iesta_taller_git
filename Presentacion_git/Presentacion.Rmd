@@ -66,7 +66,7 @@ class: header_background
 - #### <font color = #000000> Git permite el seguimiento de la evolución de un conjunto de archivos que se llama repositorio. <font>
 --
 
-- #### <font color = #000000> Un sistema de control de versiones nos va a servir para trabajar en equipo de una manera mucho más simple y optima cuando estamos desarrollando software. <font> 
+- #### <font color = #000000> Un sistema de control de versiones nos va a servir para trabajar en equipo de una manera mucho más simple y óptima cuando estamos desarrollando software. <font> 
 --
 
 - #### <font color = #000000> Trackear y obtener versiones anteriores de nuestro proyecto de manera sencilla <font> 
@@ -188,6 +188,10 @@ class: header_background
 
 - ## <font color = #000000> **Módulo 5:** git stash <font>
 
+--
+
+- ## <font color = #000000> **Módulo 6:** gitignore <font>
+
 ---
 class: title-slide,middle
 
@@ -241,7 +245,7 @@ class: header_background
 
 --
 
-Primero tenemos que situarnos en nuestro directorio, movernos con el comando de la terminal `cd` y la ruta de nuestro directorio entre comillas. 
+Primero tenemos que situarnos en nuestro directorio, movernos con el comando de la terminal `cd` y la ruta de nuestro directorio.
 
 Una vez hecho esto, vamos a pedirle a git que haga el seguimiento de este directorio, lo haremos de la siguiente forma : 
 
@@ -249,7 +253,7 @@ Una vez hecho esto, vamos a pedirle a git que haga el seguimiento de este direct
 git init 
 ```
 
-Luego nos saldra un mensaje haciendo referencia a que ya estamos haciendo el seguimiento de nuestro directorio con **git**.
+Luego nos saldrá un mensaje haciendo referencia a que ya estamos haciendo el seguimiento de nuestro directorio con **git**.
 ---
 
 class: header_background
@@ -600,7 +604,7 @@ class: title-slide,middle
 
 ## 1. Modificar confirmaciones  <font> 
 ## 2. Volver a versiones anteriores sin dejar una confirmación <font> 
-## 3. Volver a versones anteriores dejando una confirmación <font> 
+## 3. Volver a versiones anteriores dejando una confirmación <font> 
 
 
 ---
@@ -633,7 +637,7 @@ git commit --amend
 --
 .center[
 
-**¡OJO!** si queremos hacer una modificación con *ammend* que ya se encuentra en la nube, al hacer un **push** debemos forzarlo con --force y nuestros compañeros al hacer **pull** un --rebase.
+**¡OJO!** si queremos hacer una modificación con *amend* que ya se encuentra en la nube, al hacer un **push** debemos forzarlo con --force y nuestros compañeros al hacer **pull** un --rebase.
 
 ]
 ---
@@ -652,15 +656,15 @@ class: header_background
 git reset --opcion <id commit>
 ```
 
-Al ejecutar este comando estamos modificando el historial, si esta en github:
+Al ejecutar este comando estamos modificando el historial, si está en github:
 
 --
 
-#### <font color = FF0000> *¿Que debemos hacer?* </font>
+#### <font color = FF0000> *¿Qué debemos hacer?* </font>
 
 --
 
-#### <font color = FF0000> *¿Que debemos de pedir a nuestros compañeros que hagan?* </font>
+#### <font color = FF0000> *¿Qué debemos de pedir a nuestros compañeros que hagan?* </font>
 
 --
 
@@ -807,7 +811,7 @@ class: header_background
 
 La razón principal de utilizar ramas es que nos permite obtener diferentes versiones de nuestro trabajo y a su vez tener un seguimiento de estas. 
 
-Existen diferentes esquemas de trabajo para el manejo de ramas, como puede ser el de *git flow* una rama principal, una de desarrollo una de pre-desarollo que de ella se desprenden cada 
+Existen diferentes esquemas de trabajo para el manejo de ramas, como puede ser el de *git flow* una rama principal, una de desarrollo, una de pre-desarollo que de ella se desprenden cada 
 una de las features o bugs del software. Esto depende del equipo y el objetivo del proyecto.
 
 <blockquote>
@@ -968,7 +972,7 @@ class: header_background
 
 --
 
-- Crear una rama local ascoada a la rama remota
+- Crear una rama local asociada a la rama remota
 
   ```{bash, eval = F}
   git checkout --track <rama>
