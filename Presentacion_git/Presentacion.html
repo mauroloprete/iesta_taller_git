@@ -587,15 +587,102 @@ class: inverse,middle
 
 ---
 
+
+class: header_background
+
+# Repaso del taller anterior:
+
+#### - Aprendimos comandos básicos de la terminal
+
+Utilizamos por primera vez la terminal, navegamos entre nuestros directorios con **cd**, listamos archivos con **ls**.
+
+Creamos nuestro directorio de trabajo con **mkdir**, luego agregamos un archivo de ejemplo con el block de notas utilizando **notepad**.
+
+--
+
+#### - Primer contacto con git y vimos sus posibles usos.
+
+Primero configuramos nuestra información de usuario con **git config --global user.name "Nombre"** y **git config --global "user.email"**.
+
+Vimos que existe la posibilidad de configurar un nombre personalizado para cada proyecto o consultar la información fijada, 
+quitando los flgs (comando luego de --) ó simplemente haciendo referencia a que variable desemos consultar (Para user.name : **git config user.name**), respectivamente. 
+
+Convertimos nuestro directorio en un repositorio de git con **git init**. 
+
+Hicimos nuestro primer commit, primero, le indicamos a git que le de seguimiento al archivo de prueba con **git add**,
+esto hizo que el archivo pase del directorio de trabajo (WD) al área de preparación (SA) pronto para incluir su 'etiqueta'.
+
+Una vez allí, pudimos hacer nuestro primer commit con **git commit**, probamos la versión 'corta' con **git commit -m "Mensaje"** y 
+también aprendimos a hacerlo desde VIM, en el caso de querer mensajes mas extensos.
+
+
+---
+
+class: header_background
+
+# Repaso del taller anterior:
+
+#### - Creamos nuestro primer repositorio local y en la nube.
+
+
+Desde Github, creamos un repositorio vacio, una vez hecho esto obtuvimos un enlace. A nuestro repositorio local le indicamos este enlace utilizando,
+**git remote add &lt;NombreOrigin&gt; &lt;Enlace&gt;**. 
+
+Tuvimos algunos percances, ingresamos mal el enlace, y luego lo corregimos con **git remote set-url {NombreOrigin} {Enlace}**.
+
+Una vez hecho esto, le pedimos a git que subiera nuestro repositorio a la nube con **git push {NombreOrigin} {NombreRama}**. En base a esto aprendimos que según la versión de git
+que tengamos instalada y/o configuración del mismo, git pone diferentes nombres a las ramas principales, antiguamente utilizaba *master* y ahora *main*.
+
+#### &lt;font color = #000000&gt; Tip: Cambiar rama por defecto al usar git init &lt;/font&gt;
+
+
+
+```bash
+git config --global init.defaultBranch main
+```
+
+Para saber que nombre se utilizó en nuestro caso, utilizamos **git branch**. En ese momento, al crear un repositorio privado, Github abrió una ventana emergente
+para que realizamos una autenticación en el navegador, si utilizamos windows el recordará estas credenciales. En el caso de Linux (o si lo queremos hacer en Win)
+debemos de generar una clave pública. 
+
+[Mas info, aquí](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
+---
+
+class: header_background
+
+# Repaso del taller anterior:
+
+#### - Nos familizariamos con git como control de versiones, navegando en el historial
+
+Primero, consultamos nuestro historial con **git log**, aprendimos los elementos importantes (Hash,fecha,mensaje,etc), volvimos a una versión anterior de la presentación del taller utilizando 
+**git chekout {hash}** y vimos que nos situabamos exactamente en ese instante del tiempo. 
+
+Para volver a la versión actual con **git checkout {rama}** y mencionamos la alternativa de **git switch -**.
+
+Hicimos un pequeño cambio en nuestro archivo y con **git diff** pudimos ver que git detectó que el archivo cambió, y sabe exactamente que lineas fuerón modificadas tanto las adiciones como las eliminaciones.
+
+Aprendimos un comando útil y necesario siempre para orientarnos en el estado actual del repositorio **git status**. Extendimos este comando con su versión 'minimalista', **git status -s** y aprendimos
+los iconos de los diferentes estados.
+
+--
+
+### ¿y ahora?
+
+Vamos a aprender a modificar confirmaciones y a trabajar con ramas. Además, dejamos el camino abierto en el aprendizaje y/o uso de git con el **stash** y aplicaciones que dependen de **git**.
+
+---
+
+
 class: title-slide,middle
 
 
 # Módulo 3: Correción de errores en el proyecto
 
 
-## 1. Modificar confirmaciones  &lt;font&gt; 
-## 2. Volver a versiones anteriores sin dejar una confirmación &lt;font&gt; 
-## 3. Volver a versiones anteriores dejando una confirmación &lt;font&gt; 
+## 1. Modificar confirmaciones  
+## 2. Volver a versiones anteriores 
+## 3. Volver a versiones anteriores elimniando el historial. 
 
 
 ---
@@ -813,7 +900,7 @@ class: header_background
 
 La razón principal de utilizar ramas es que nos permite obtener diferentes versiones de nuestro trabajo y a su vez tener un seguimiento de estas. 
 
-Existen diferentes esquemas de trabajo para el manejo de ramas, como puede ser el de *git flow* una rama principal, una de desarrollo una de pre-desarollo que de ella se desprenden cada 
+Existen diferentes esquemas de trabajo para el manejo de ramas, como puede ser el de *git flow* una rama principal, una de desarrollo, una de pre-desarollo que de ella se desprenden cada 
 una de las features o bugs del software. Esto depende del equipo y el objetivo del proyecto.
 
 &lt;blockquote&gt;
@@ -1026,9 +1113,48 @@ class: inverse,middle
 ### 4. Fusionar la rama principal &lt;font&gt;
 
 ---
+
 class: title-slide,middle
 
-# Módulo 5: Git stash
+# Módulo 5: Ignorando archivos
+
+## 1. Crear nuestro gitignore 
+## 2. Ver diferentes gitignore
+---
+
+class: header_background
+
+# Módulo 5: Ignorando archivos
+
+## Crear nuestro git ignore
+
+Para ignorar un archivo simplemente debemos de crear un archivo en nuestro directorio de
+git con el nombre `.gitignore` y dentro de él escribir los archivos que deseamos ignorar.
+
+Se pueden escribir los archivos por su nombre o utilizar expresiones regulares o ingorar carpetas
+enteras.
+
+### &lt;font color = #035AA6&gt; Ignorar archivos por extensión &lt;/font&gt;
+
+
+```bash
+\*.csv # Si se encuentran en la raíz. 
+/*.csv # Si se encuentran en cualquier subdirectorio.
+```
+
+## Ver ejemplos de gitignore
+
+[Uno de R](https://github.com/github/gitignore/blob/main/R.gitignore)
+
+
+[Uno de Python](https://github.com/github/gitignore/blob/main/Python.gitignore)
+
+
+---
+
+class: title-slide,middle
+
+# Módulo Extra: Git stash
 
 ## 1. Guardar cambios temporalmente &lt;font&gt; 
 ## 2. Listar cambios guardados temporalmente &lt;font&gt;
@@ -1041,7 +1167,7 @@ class: title-slide,middle
 
 class: header_background
 
-# Módulo 5: Git stash
+# Módulo Extra: Git stash
 
 ## Guardar cambios temporalmente
 
@@ -1063,7 +1189,7 @@ y no nos encontramos en la rama correspondiente.
 
 class: header_background
 
-# Módulo 5: Git stash
+# Módulo Extra: Git stash
 
 ## Listar cambios temporales.
 
@@ -1086,7 +1212,7 @@ desde el más nuevo hasta el mas viejo.
 
 class: header_background
 
-# Módulo 5: Git stash
+# Módulo Extra: Git stash
 
 ## Aplicar  el último cambio temporal.
 
@@ -1116,7 +1242,7 @@ git stash apply n
 
 class: header_background
 
-# Módulo 5: Git stash
+# Módulo Extra: Git stash
 
 ## Borrar el último cambio temporal.
 
@@ -1141,43 +1267,6 @@ git stash pop
 
 ---
 
-class: title-slide,middle
-
-# Módulo 6: Ignorando archivos
-
-## 1. Crear nuestro gitignore 
-## 2. Ver diferentes gitignore
----
-
-class: header_background
-
-# Módulo 6: Ignorando archivos
-
-## Crear nuestro git ignore
-
-Para ignorar un archivo simplemente debemos de crear un archivo en nuestro directorio de
-git con el nombre `.gitignore` y dentro de él escribir los archivos que deseamos ignorar.
-
-Se pueden escribir los archivos por su nombre o utilizar expresiones regulares o ingorar carpetas
-enteras.
-
-### &lt;font color = #035AA6&gt; Ignorar archivos por extensión &lt;/font&gt;
-
-
-```bash
-\*.csv # Si se encuentran en la raíz. 
-/*.csv # Si se encuentran en cualquier subdirectorio.
-```
-
-## Ver ejemplos de gitignore
-
-[Uno de R](https://github.com/github/gitignore/blob/main/R.gitignore)
-
-
-[Uno de Python](https://github.com/github/gitignore/blob/main/Python.gitignore)
-
-
----
 
 class: header_background
 
