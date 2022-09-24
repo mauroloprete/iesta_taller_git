@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
-          path: './presentacion_git/'
+          path: 'Presentacion_git/'
       - name: Create index.html
         run: mv Presentacion.html index.html
       - name: Deploy to GitHub Pages
