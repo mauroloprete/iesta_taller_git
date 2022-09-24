@@ -30,6 +30,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Create index.html
+        run: mv Presentacion_git/Presentacion.html Presentacion_git/index.html
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload artifact
@@ -37,8 +39,6 @@ jobs:
         with:
           # Upload entire repository
           path: 'Presentacion_git/'
-      - name: Create index.html
-        run: mv Presentacion_git/Presentacion.html index.html
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
